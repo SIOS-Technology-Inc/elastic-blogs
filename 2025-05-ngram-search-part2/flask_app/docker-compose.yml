@@ -1,0 +1,10 @@
+services:
+  search_with_ngram_sample_202505:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: 'search_with_ngram_sample_202505'
+    volumes:
+      - ./:/app
+    ports:
+      - 5000:5000

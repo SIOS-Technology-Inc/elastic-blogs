@@ -1,0 +1,28 @@
+elasticsearch:
+  endpoint: url_of_elasticsearch_endpoint
+cookie:
+  expiry_days: 1
+  key: some_signature_key
+  name: some_cookie_name
+credentials:
+  usernames:
+    user1:
+      name: user1
+      password: secret_password
+      encoded_api_key: dummy==
+    user2:
+      name: user2
+      password: secret_password
+      encoded_api_key: dummy==
+    user3:
+      name: user3
+      password: secret_password
+      encoded_api_key: dummy==
+    user4:
+      name: user4
+      password: secret_password
+      encoded_api_key: dummy==
+#
+# password は、適宜適切な値を設定し、かつ、ハッシュ化すべきですが、
+# ここでは簡易的なサンプルのため、平文で設定しています。
+# 実際の運用では、セキュリティを考慮して適切な方法でパスワードを管理してください。

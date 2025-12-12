@@ -1,0 +1,10 @@
+services:
+  highlight_sample_202504:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: 'highlight_sample_202504'
+    volumes:
+      - ./:/app
+    ports:
+      - 8501:8501

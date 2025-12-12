@@ -1,0 +1,10 @@
+services:
+  semantic_rerank_sample_202505:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: 'semantic_rerank_sample_202505'
+    volumes:
+      - ./:/app
+    ports:
+      - 8501:8501

@@ -1,0 +1,10 @@
+services:
+  rbac_sample_202506:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: 'rbac_sample_202506'
+    volumes:
+      - ./:/app
+    ports:
+      - 8501:8501

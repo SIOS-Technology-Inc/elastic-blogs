@@ -1,0 +1,20 @@
+elasticsearch:
+  endpoint: http://host.docker.internal:9200/
+cookie:
+  expiry_days: 1
+  key: some_signature_key
+  name: some_cookie_name
+credentials:
+  usernames:
+    sales_user:
+      name: sales_user
+      password: sales_user
+      api_key: xxx==
+    hr_user:
+      name: hr_user
+      password: hr_user
+      api_key: xxx==
+    sales_and_hr_user:
+      name: sales_and_hr_user
+      password: sales_and_hr_user
+      api_key: xxx==
