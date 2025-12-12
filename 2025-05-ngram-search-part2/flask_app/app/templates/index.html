@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+        <title>Search Medicine</title>
+    </head>
+    <body>
+        <h1>医薬品検索</h1>
+
+        <div>
+            <span class="label">検索キーワード1:</span> <input class="search" type="text" id="search_medicine_name1" name="search_medicine_name1" value="" onkeyup="onkeyup1(this.value);"><br>
+            <span class="label">検索キーワード2:</span> <input class="search" type="text" id="search_medicine_name2" name="search_medicine_name2" value="" onkeyup="onkeyup2(this.value);">
+            <input type="hidden" id="hidden1" value="">
+            <input type="hidden" id="hidden2" value="">
+        </div>
+
+        <br>
+
+        <div id="detail_info" class="wide_label">
+        </div>
+    
+        <form action="/post" method="POST">
+            <br>
+            <span class="label">医薬品リスト</span>
+            <div id="search_results" class="search_results">
+                <select name="select1">
+                    <option value="">--</option>
+                </select>
+            </div>
+        </form>
+    </body>
+</html>

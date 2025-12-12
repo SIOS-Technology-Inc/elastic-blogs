@@ -1,0 +1,10 @@
+services:
+  dls_sample_202507:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: 'dls_sample_202507'
+    volumes:
+      - ./:/app
+    ports:
+      - 8501:8501

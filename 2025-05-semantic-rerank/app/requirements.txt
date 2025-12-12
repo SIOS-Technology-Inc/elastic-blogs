@@ -1,0 +1,4 @@
+elasticsearch==8.18.1
+streamlit==1.44.0
+python-dotenv==1.0.1
+langchain-cohere==0.4.4
