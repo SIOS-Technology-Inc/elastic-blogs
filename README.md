@@ -15,6 +15,7 @@
 | [2025-06-rbac](2025-06-rbac/) | 2025年06月に公開の「Elasticsearchのインデックスに対するアクセス制御（API経由での動作確認）」のサンプル。 |
 | [2025-07-dls](2025-07-dls/) | 2025年07月に公開の「Elasticsearchのドキュメントごとのアクセス制御（Document Level Security）」のサンプル。 |
 | [2025-12-recursive-chunking](2025-12-recursive-chunking/) | 2025年12月に公開の「Markdown 文書のための再帰チャンキング入門 — Elasticsearch での実践と比較」のサンプル。 |
+| [2026-02-otel](2026-02-otel/) | 2026年2月に公開の「OpenTelemetry を使って Elastic Observability にログ、メトリクス、トレースを取り込んでみよう。」のサンプル。 |
 
 Copyright (c) SIOS Technology, Inc. All rights reserved.
 
