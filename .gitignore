@@ -3,6 +3,15 @@
 .venv/
 .vscode/
 __pycache__/
+node_modules/
+dist/
+build/
+.env
 *.bak
 *.org
 *.ignore
+*.pem
+*.key
+*.pyc
+*.log
+id_rsa
