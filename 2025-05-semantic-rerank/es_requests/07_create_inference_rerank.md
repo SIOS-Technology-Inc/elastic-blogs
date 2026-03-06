@@ -1,13 +1,13 @@
-# ƒŠƒ‰ƒ“ƒN—p‚Ì inference ‚Ìì¬ƒŠƒNƒGƒXƒg
+# ãƒªãƒ©ãƒ³ã‚¯ç”¨ã® inference ã®ä½œæˆãƒªã‚¯ã‚¨ã‚¹ãƒˆ
 
-‚±‚±‚Å‚ÍA Cohere ‚Ì rerank-v3.5 ‚ğ—˜—p‚µ‚Ü‚·B
+ã“ã“ã§ã¯ã€ Cohere ã® rerank-v3.5 ã‚’åˆ©ç”¨ã—ã¾ã™ã€‚
 
 ```
 PUT _inference/rerank/cohere_rerank_v3pt5
 {
   "service": "cohere",
   "service_settings": {
-    "api_key": "<Cohere‚ÌAPI-KEY>",
+    "api_key": "<Cohereã®API-KEY>",
     "model_id": "rerank-v3.5",
     "rate_limit": {
       "requests_per_minute": 10
@@ -20,7 +20,7 @@ PUT _inference/rerank/cohere_rerank_v3pt5
 }
 ```
 
-¡‰ñ‚ÍA•]‰¿—p‚Ì Cohere ‚Ì API Key ‚ğ—˜—p‚·‚é‚±‚Æ‚ğ‘z’è‚µ‚Ä‚¢‚é‚½‚ßA
+ä»Šå›ã¯ã€è©•ä¾¡ç”¨ã® Cohere ã® API Key ã‚’åˆ©ç”¨ã™ã‚‹ã“ã¨ã‚’æƒ³å®šã—ã¦ã„ã‚‹ãŸã‚ã€
 
 ```
 "rate_limit": {
@@ -28,6 +28,6 @@ PUT _inference/rerank/cohere_rerank_v3pt5
 }
 ```
 
-‚ğİ’è‚µ‚Ä‚¢‚Ü‚·B
+ã‚’è¨­å®šã—ã¦ã„ã¾ã™ã€‚
 
-—LŒ_–ñ‚µ‚ÄA–{”Ô‚Å‰^—p‚·‚éê‡‚É‚ÍAãŒÀ‚ğˆø‚«ã‚°‚Ä‚­‚¾‚³‚¢B
+æœ‰å„Ÿå¥‘ç´„ã—ã¦ã€æœ¬ç•ªã§é‹ç”¨ã™ã‚‹å ´åˆã«ã¯ã€ä¸Šé™ã‚’å¼•ãä¸Šã’ã¦ãã ã•ã„ã€‚
