@@ -14,7 +14,7 @@ FROM waganeko METADATA _score, _id, _index
        (WHERE MATCH(content, ?query) | SORT _score DESC | LIMIT 20)
 | DROP content_embedding
 | FUSE
-| chunk_no, content, _score
+| KEEP chunk_no, content, _score
 | SORT _score DESC
 | LIMIT 10
 """,
