@@ -1,0 +1,8 @@
+ARG ES01_VERSION
+
+FROM docker.elastic.co/elasticsearch/elasticsearch:${ES01_VERSION}
+
+# プラグインのインストールを実行
+RUN bin/elasticsearch-plugin install --batch analysis-icu
+RUN bin/elasticsearch-plugin install --batch analysis-kuromoji
+
