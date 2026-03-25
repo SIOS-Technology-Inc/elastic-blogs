@@ -26,7 +26,7 @@ FROM waganeko METADATA _score, _id, _index
 | SORT _score DESC
 | KEEP content
 | LIMIT 1
-| COMPLETION CONCAT("Answer in Japanese the following question ", ?query, "based on:\n", content) WITH { "inference_id" : ".openai-gpt-oss-120b-completion" }
+| COMPLETION CONCAT("Answer in Japanese the following question ", ?query, " based on:\n", content) WITH { "inference_id" : ".openai-gpt-oss-120b-completion" }
 """,
   "params": [
     { "query": "吾輩が生まれた場所は?" }
