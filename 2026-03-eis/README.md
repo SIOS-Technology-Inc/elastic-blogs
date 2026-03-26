@@ -1,8 +1,8 @@
-# Elastic Cloud Connector & EIS 活用サンプル
+# Elastic Cloud Connect & EIS 活用サンプル
 
 ## 概要
 
-本サンプルは、Elastic Cloud Connector と Elastic Inference Service (EIS) を活用し、Self-Managed（オンプレミス等）の Elasticsearch 環境に機械学習モデルを直接インストールすることなく、高度な検索・生成 AI 機能を実装するサンプルプロジェクトです。
+本サンプルは、Elastic Cloud Connect と Elastic Inference Service (EIS) を活用し、Self-Managed（オンプレミス等）の Elasticsearch 環境に機械学習モデルを直接インストールすることなく、高度な検索・生成 AI 機能を実装するサンプルプロジェクトです。
 
 ## 実現できること
 
@@ -15,7 +15,7 @@
 ## システム構成イメージ
 
 ```
-[Self-Managed Elasticsearch] <--- Elastic Cloud Connector ---> [Elastic Cloud (EIS)]
+[Self-Managed Elasticsearch] <--- Elastic Cloud Connect ---> [Elastic Cloud (EIS)]
 ```
 
 ※Elastic Inference Service (EIS) を経由して、各種マネージドモデルを利用します。
@@ -102,7 +102,7 @@ docker-compose up -d --build
 
 - ※検証用のため、シングルノード構成となっています。
 
-### 3. Elastic Cloud 連携 (Cloud Connector)
+### 3. Elastic Cloud 連携 (Cloud Connect)
 
 #### 3.1. Self-Managed Kibana へのログイン
 
