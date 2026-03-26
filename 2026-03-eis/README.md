@@ -190,7 +190,12 @@ waganeko_tmp インデックスの内容を waganeko インデックスへ reind
 
 必要なければ、削除してかまいません。
 
-### 参考リンク
+### Cloud Connect の費用
 
 - Cloud Connect を利用した場合の追加費用については、下記を参照してください。
   - https://cloud.elastic.co/cloud-pricing-table?productType=cloud_connect
+
+- 実際にかかった費用は、Elastic Cloud の Billing 画面で確認することができます。
+
+<img src="./imgs/2026-03-26 091535-billing-cloud-connect.png">
+
