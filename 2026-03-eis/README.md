@@ -168,7 +168,16 @@ Home > Management > Cloud Connect をクリック。
 
 ### サンプルの概略フロー
 
-<img src="./imgs/rag-flow.svg" alt="RAG flow">
+```mermaid
+graph TD;
+    質問の入力 --> キーワード検索;
+    質問の入力 --> ベクトル検索;
+    キーワード検索 --> RRF;
+    ベクトル検索 --> RRF;
+    RRF --> Semantic_Rerank;
+    Semantic_Rerank --> LLM;
+    LLM --> 質問に対する回答;
+```
 
 ---
 
