@@ -166,6 +166,10 @@ Home > Management > Cloud Connect をクリック。
 
 [es_scripts/a11_completion.md](./es_scripts/a11_completion.md) を実行し、ES|QL の COMPLETION 関数を使用して、検索結果に基づいた自然言語の回答を取得します。
 
+### サンプルの概略フロー
+
+<img src="./imgs/rag-flow.svg" alt="RAG flow">
+
 ---
 
 ## 技術的な補足
