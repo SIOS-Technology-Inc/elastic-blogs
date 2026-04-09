@@ -1,0 +1,27 @@
+version: "2.2"
+
+services:
+
+  autoops-otel-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile-autoops
+      args:
+        - AUTOOPS_VERSION=${AUTOOPS_VERSION}
+    user: 1000:1000
+    volumes:
+      - autoopsdata:/usr/share/elastic-agent/data
+    command: ["--config", "otel_samples/autoops_es_ssl.yml"]
+    environment:
+      - AUTOOPS_OTEL_URL=${AUTOOPS_OTEL_URL}
+      - AUTOOPS_TOKEN=${AUTOOPS_TOKEN}
+      - AUTOOPS_ES_URL=${AUTOOPS_ES_URL}
+      - ELASTIC_CLOUD_CONNECTED_MODE_API_KEY=${ELASTIC_CLOUD_CONNECTED_MODE_API_KEY}
+      - AUTOOPS_ES_API_KEY=${AUTOOPS_ES_API_KEY}
+      - AUTOOPS_TEMP_RESOURCE_ID=${AUTOOPS_TEMP_RESOURCE_ID}
+      - AUTOOPS_ES_CA=${AUTOOPS_ES_CA}
+
+volumes:
+  autoopsdata:
+    driver: local
+

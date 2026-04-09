@@ -17,6 +17,7 @@
 | [2025-12-recursive-chunking](2025-12-recursive-chunking/README.md) | 2025年12月に公開の「Markdown 文書のための再帰チャンキング入門 — Elasticsearch での実践と比較」のサンプル。 |
 | [2026-02-otel](2026-02-otel/README.md) | 2026年2月に公開の「OpenTelemetry を使って Elastic Observability にログ、メトリクス、トレースを取り込んでみよう。」のサンプル。 |
 | [2026-03-eis](2026-03-eis/README.md) | 2026年3月に公開の「Elastic Inference Service を使ったベクトル検索およびAIによる回答」のサンプル。 |
+| [2026-04-autoops](2026-04-autoops/README.md) | 2026年4月に公開の「AutoOps を使ってオンプレミスの Elasticsearch のインデックス情報、メトリクスを Elastic Cloud で監視する」のサンプル。 |
 
 Copyright (c) SIOS Technology, Inc. All rights reserved.
 
