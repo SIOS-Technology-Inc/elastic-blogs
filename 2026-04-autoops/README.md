@@ -100,7 +100,7 @@ Rancher Desktop 等の Docker ランタイムが起動していることを確�
 docker-compose up -d --build
 ```
 
-しばらく時間がかかります。
+オンプレミスの Elasticsearch 9.3.3 のダウンロードが行われるため、しばらく時間がかかります。
 
 ### 3. オンプレミス側での API Key の発行
 
@@ -239,7 +239,7 @@ AUTOOPS_TEMP_RESOURCE_ID=...
 docker-compose -f ./docker-compose-autoops.yml up -d --build
 ```
 
-しばらく時間がかかります。
+AutoOps用の Elastic Agent 9.3.2 のダウンロードが行われるため、しばらく時間がかかります。
 
 #### 5.5. Elastic Cloud 側での受付開始
 
