@@ -1,0 +1,12 @@
+ARG AUTOOPS_VERSION
+
+FROM docker.elastic.co/elastic-agent/elastic-otel-collector-wolfi:${AUTOOPS_VERSION}
+
+COPY --chown=1000:1000 --chmod=700 ./certs/ /usr/share/elastic-agent/certs/
+
+USER 1000
+
+ENTRYPOINT ["docker-entrypoint"]
+
+# もし、docker-entrypoint がうまく動作しない場合は、一時的に docker-entrypoint を無効化して調査する。
+# ENTRYPOINT ["/bin/sh", "-c", "while :; do sleep 30; done"]
