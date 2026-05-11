@@ -48,9 +48,36 @@ Elastic Audit Log は、Elasticsearch クラスターの監査ログです。
 | ファイル | 説明 | 備考 |
 |---|---|---|
 | [.env.sample](./.env.sample) | 環境変数のテンプレート | .env にコピーして使用 |
-| [docker-compose.yml](./docker-compose.yml) | Elasticsearch 本体の構成 | Data : 1 node, Kibana :  1 node <br> クエリーの内容を含む Audit log を出力する。 |
+| [docker-compose.yml](./docker-compose.yml) | Elasticsearch 本体の構成 | Data : 1 node, Kibana :  1 node <br> クエリーの内容を含む Audit Log を出力する。(*1) |
 | [Dockerfile-es01](./Dockerfile-es01) | Elasticsearch用カスタム Dockerfile | カスタマイズした log4j2.properties ファイルをコピーして使用します。 |
-| [log4j2.properties](./log4j2.properties) | Elasticsearch用ログファイル出力設定ファイル | /usr/share/elasticsearch/logs/クラスタ名_audit.json に Audit log を出力するための設定ファイル。 |
+| [log4j2.properties](./log4j2.properties) | Elasticsearch用ログファイル出力設定ファイル | /usr/share/elasticsearch/logs/クラスタ名_audit.json に Audit Log を出力するための設定ファイル。(*2) |
+
+(*1) Audit Log の取得用に下記の設定を追加しています。
+
+```
+      - xpack.security.audit.enabled=true
+      - xpack.security.audit.logfile.events.emit_request_body=true
+      - xpack.security.audit.logfile.events.include=_all
+```
+
+(*2) Audit Log をファイルに出力するために下記の設定を追加しています。
+
+```
+# appender.audit_rolling.type = Console
+appender.audit_rolling.type = RollingFile
+appender.audit_rolling.name = audit_rolling
+appender.audit_rolling.fileName = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}_audit.json
+appender.audit_rolling.filePattern = ${sys:es.logs.base_path}${sys:file.separator}${sys:es.logs.cluster_name}_audit-%d{yyyy-MM-dd}-%i.json.gz
+appender.audit_rolling.policies.type = Policies
+appender.audit_rolling.policies.time.type = TimeBasedTriggeringPolicy
+appender.audit_rolling.policies.time.interval = 1
+appender.audit_rolling.policies.time.modulate = true
+appender.audit_rolling.policies.size.type = SizeBasedTriggeringPolicy
+appender.audit_rolling.policies.size.size = 10MB
+appender.audit_rolling.strategy.type = DefaultRolloverStrategy
+# appender.audit_rolling.strategy.fileIndex = nomax
+appender.audit_rolling.strategy.fileIndex = 10
+```
 
 ## セットアップ手順
 
