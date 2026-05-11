@@ -1,0 +1,9 @@
+ARG STACK_VERSION=9.4.0
+
+FROM docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+
+USER elasticsearch
+
+# Audit Log の出力先を変更した property file をコピーする。
+COPY ./log4j2.properties config/log4j2.properties
+
