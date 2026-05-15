@@ -58,3 +58,21 @@ INFERENCE_ID=.jina-embeddings-v5-omni-small
   2. その音声を Jina でベクトルに変換
   3. Elasticsearch でベクトル類似検索（上位 5 件）
 - **用途:** 「似た問い合わせ音声を探す」など、音声同士のマッチング検証
+
+## Audio Sample Files
+
+音声ファイルはプライバシー・機密情報保護の観点から、本リポジトリには含めていません。
+
+各自で `audio-samples` フォルダを作成し、検証用の音声ファイルを配置してください。
+
+例：
+
+```text
+2026-05-15-test-jina-audio/
+├── audio-samples/
+│   ├── 1.wav
+│   ├── 2.wav
+│   └── ...
+├── index_audio_eis.py
+├── search_audio_poc.py
+└── search_audio_by_audio.py
