@@ -2,11 +2,8 @@
 
 Elastic Cloud Serverless と Jina の **`jina-embeddings-v5-omni-small`** (通称 Jina v5 Omni、small バリアント) を使ったマルチモーダル画像検索 PoC。Kibana の **Agent Builder チャット** から日本語・英語で画像を探せます。フロントエンドコードはゼロ行。
 
-<<<<<<< HEAD
-=======
 > 📝 **このリポジトリの解説ブログ**: [SIOS Tech ブログ — Elastic カテゴリ](https://elastic.sios.jp/category/blog/) で日本語のシリーズ記事として公開しています。本 PoC の動機・実装・運用までの全体像はそちらをご参照ください。
 
->>>>>>> 615256f (Update README)
 ---
 
 ## 📌 Elastic のバージョンについて
