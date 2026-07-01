@@ -1,0 +1,18 @@
+# 秘密情報（絶対に公開しない）
+API_analyzer.txt
+.env
+.env.*
+!.env.sample
+*.key
+*.pem
+certs/
+
+# 個人用ドキュメント・下書き（公開しない）
+BLOG.md
+METHODOLOGY.md
+CLAUDE.md
+blog_infographic.html
+BUILD_LOG.md
+
+# macOS が自動生成する不要ファイル
+.DS_Store
