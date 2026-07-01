@@ -1,0 +1,57 @@
+# このファイルは「どのコンテナを、どんな設定で動かすか」をまとめた起動設定です。
+# docker compose up でここに書いたサービス（es01 / kibana）を立ち上げられます。
+#
+# 検証用のシングルノード構成です。本番では使わないでください。
+# このローカル検証ではセキュリティを無効化しています（パスワード不要・HTTP 接続）。
+# 既存の3ノードクラスタと衝突しないよう、ホスト側ポートは 9201 / 5602 にしています。
+services:
+  # es01 = Elasticsearch 本体のコンテナ。
+  es01:
+    # build = 既存イメージではなく、Dockerfile から自分でイメージを組み立てる指定。
+    build:
+      context: .                      # ビルドの基準フォルダ（このフォルダ）
+      dockerfile: Dockerfile-es01     # 使う設計図ファイル
+      args:
+        ES_VERSION: ${ES_VERSION}     # .env の ES_VERSION を Dockerfile に渡す
+    container_name: jp_analyzer_es01  # 起動するコンテナの名前
+    # environment = コンテナ内の環境変数（ES の動作設定）。
+    environment:
+      - node.name=es01
+      - discovery.type=single-node      # 1ノードだけで動かすモード
+      - xpack.security.enabled=false    # 検証用にセキュリティを無効化
+      # ES_JAVA_OPTS = ES に割り当てるメモリ量（最小と最大を同じ値にする）。
+      - "ES_JAVA_OPTS=-Xms${ES01_MEM_LIMIT} -Xmx${ES01_MEM_LIMIT}"
+    ports:
+      # ホスト側 9201 -> コンテナ内 9200
+      # "外側:内側" の対応。PC からは localhost:9201 でアクセスできる。
+      - "9201:9200"
+    ulimits:
+      # memlock = メモリのロック上限。ES の推奨に合わせて無制限(-1)にしている。
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      # データを保存する場所。コンテナを消してもデータが残るようにする。
+      - es01_data:/usr/share/elasticsearch/data
+
+  # kibana = ES を画面で操作するためのツール（任意）。
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    container_name: jp_analyzer_kibana
+    # Kibana は比較の実行には不要。必要なときだけ起動する:
+    #   docker compose --profile kibana up -d kibana
+    # profiles を付けると、通常の up では起動せず、明示したときだけ動く。
+    profiles: ["kibana"]
+    depends_on:
+      - es01   # es01 が先に立ち上がってから起動する
+    environment:
+      - SERVERNAME=kibana
+      # コンテナ内では es01:9200 のまま（ホスト側ポートだけ 5602 に変更）
+      - ELASTICSEARCH_HOSTS=http://es01:9200
+    ports:
+      # ホスト側 5602 -> コンテナ内 5601
+      - "5602:5601"
+
+# volumes = 上で使った名前付きの保存領域の宣言。
+volumes:
+  es01_data:

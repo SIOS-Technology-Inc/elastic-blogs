@@ -1,0 +1,43 @@
+{
+  "run_date": "2026-06-30",
+  "dataset_sha256": "c8420b2d5496ae2a51e94326156c481cb6e4cd24b256c58a80ec367a43037119",
+  "elasticsearch": {
+    "version": "9.4.1",
+    "plugins": [
+      {
+        "name": "es01",
+        "component": "analysis-icu",
+        "version": "9.4.1"
+      },
+      {
+        "name": "es01",
+        "component": "analysis-kuromoji",
+        "version": "9.4.1"
+      },
+      {
+        "name": "es01",
+        "component": "analysis-sudachi",
+        "version": "3.6.0"
+      }
+    ]
+  },
+  "libraries": {
+    "python": "3.12.12",
+    "elasticsearch": "9.4.1",
+    "sudachipy": "0.6.11",
+    "sudachidict_core": "20260428",
+    "fugashi": "1.5.2",
+    "unidic-lite": "1.0.8",
+    "janome": "0.5.0",
+    "lindera-py": null,
+    "openai": "2.44.0",
+    "anthropic": "0.113.0"
+  },
+  "llm": {
+    "eis_inference_ids": ".openai-gpt-oss-120b-completion",
+    "openai_model": "gpt-5.5",
+    "anthropic_model": "claude-opus-4-8",
+    "temperature": "0",
+    "prompt": "あなたは日本語検索のための補助です。\n次の文章から、検索のキーワードになる意味のまとまり（名詞・専門用語・固有名詞・薬品名・略語・数値表現など）を抽出してください。\n助詞・助動詞・記号は含めないでください。\n出力は、重複のない JSON 配列（文字列のみ）だけにしてください。説明は不要です。\n\n文章:\n{text}"
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "空港": {
+    "expect": "1",
+    "results": {
+      "kuromoji": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      },
+      "kuromoji_search": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      },
+      "sudachi_a": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      },
+      "sudachi_b": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      },
+      "sudachi_c": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      }
+    }
+  },
+  "関西空港": {
+    "expect": "1",
+    "results": {
+      "kuromoji": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      },
+      "kuromoji_search": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      },
+      "sudachi_a": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      },
+      "sudachi_b": {
+        "hit": true,
+        "ids": [
+          "1"
+        ]
+      },
+      "sudachi_c": {
+        "hit": false,
+        "ids": []
+      }
+    }
+  },
+  "NSAIDs": {
+    "expect": "2",
+    "results": {
+      "kuromoji": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "kuromoji_search": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_a": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_b": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_c": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      }
+    }
+  },
+  "300mg": {
+    "expect": "2",
+    "results": {
+      "kuromoji": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "kuromoji_search": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_a": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_b": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_c": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      }
+    }
+  },
+  "アセトアミノフェン": {
+    "expect": "2",
+    "results": {
+      "kuromoji": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "kuromoji_search": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_a": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_b": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      },
+      "sudachi_c": {
+        "hit": true,
+        "ids": [
+          "2"
+        ]
+      }
+    }
+  }
+}
