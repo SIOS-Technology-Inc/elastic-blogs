@@ -1,1 +1,12 @@
-2026-07-analyzer/METHODOLOGY.md
+# 秘密情報（絶対に公開しない）
+API_analyzer.txt
+
+# 個人用ドキュメント・下書き（公開しない）
+BLOG.md
+METHODOLOGY.md
+CLAUDE.md
+blog_infographic.html
+BUILD_LOG.md
+
+# macOS が自動生成する不要ファイル
+.DS_Store
