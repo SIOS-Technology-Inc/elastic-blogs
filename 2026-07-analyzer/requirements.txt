@@ -1,0 +1,28 @@
+# このファイルは「このプロジェクトで必要な Python ライブラリの一覧」です。
+# pip install -r requirements.txt で、ここに書いたものを一括インストールできます。
+# 「>=8.18,<10」は「8.18 以上 10 未満のバージョンを使う」という意味です。
+
+# Elasticsearch クライアント
+elasticsearch>=8.18,<10
+
+# Sudachi（Python 版）と辞書
+sudachipy>=0.6.10
+sudachidict_core>=20250000
+
+# MeCab を Python から扱う（fugashi は MeCab のラッパー）
+fugashi>=1.3.0
+unidic-lite>=1.0.8
+
+# Janome（純 Python）
+janome>=0.5.0
+
+# Lindera（Rust 製。Python バインディング）
+# 2026-06 時点では macOS/PyPI で取得できない環境があるため、
+# Python コード側では import できない場合にスキップします。
+
+# LLM（参考枠）
+openai>=1.40.0
+anthropic>=0.40.0
+
+# 環境変数
+python-dotenv>=1.0.1

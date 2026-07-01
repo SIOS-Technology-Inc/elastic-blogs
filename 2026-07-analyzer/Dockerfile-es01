@@ -1,0 +1,60 @@
+# このファイルは「Elasticsearch のコンテナイメージの作り方」を書いた設計図です。
+# 公式の ES イメージをベースに、日本語解析プラグインと辞書を足したものを作ります。
+# docker compose build / up のときに、この手順どおりにイメージが組み立てられます。
+
+# ARG = ビルド時に外から差し替えられる変数。ここでは ES のバージョンを指定する。
+ARG ES_VERSION=9.4.1
+
+# FROM = ベースにするイメージ。Elastic 公式の Elasticsearch イメージを使う。
+FROM docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
+
+# ES_VERSION is needed again inside this build stage.
+# （FROM より後では ARG を再宣言しないと使えないため、もう一度書いている）
+ARG ES_VERSION=9.4.1
+
+# --- Official Elastic analysis plugins -------------------------------------
+# Kuromoji is the official Japanese analysis plugin. ICU is used for
+# normalization options in real deployments.
+# 公式プラグインを入れる。--batch は確認プロンプトを出さずに自動で進める指定。
+# analysis-icu: 正規化などに使う。analysis-kuromoji: 公式の日本語アナライザー。
+RUN bin/elasticsearch-plugin install --batch analysis-icu
+RUN bin/elasticsearch-plugin install --batch analysis-kuromoji
+
+# --- External plugin: elasticsearch-sudachi (Works Applications) -----------
+# NOTE: Sudachi is NOT an official Elastic plugin. Confirm the exact asset
+# name for YOUR Elasticsearch version on the releases page before building:
+#   https://github.com/WorksApplications/elasticsearch-sudachi/releases
+# IMPORTANT: the asset must match the ES PATCH version exactly. Sudachi 3.6.0
+# ships a 9.4.1 asset but NOT a 9.4.2 one, which is why ES_VERSION defaults to
+# 9.4.1 here. If you change ES_VERSION, pick a patch that has a matching asset.
+#
+# 補足（日本語）: Sudachi は Elastic 公式ではなく「外部プラグイン」。
+# 大事なのは、ES のパッチバージョンと完全に一致する配布物を使うこと。
+# Sudachi 3.6.0 は 9.4.1 用はあるが 9.4.2 用が無いので、ここでは 9.4.1 を既定にしている。
+ARG SUDACHI_PLUGIN_VERSION=3.6.0
+# プラグインの zip をダウンロードする URL を組み立てる。
+ARG SUDACHI_PLUGIN_URL=https://github.com/WorksApplications/elasticsearch-sudachi/releases/download/v${SUDACHI_PLUGIN_VERSION}/elasticsearch-${ES_VERSION}-analysis-sudachi-${SUDACHI_PLUGIN_VERSION}.zip
+RUN bin/elasticsearch-plugin install --batch "${SUDACHI_PLUGIN_URL}"
+
+# --- Sudachi dictionary (system_core.dic) ----------------------------------
+# The Sudachi plugin needs a dictionary file. We place the core dictionary
+# under config/sudachi. Reference it with resources_path in the index settings
+# if needed (see es_scripts/02_sudachi_index.md).
+#
+# 補足（日本語）: Sudachi は「辞書ファイル」が無いと動かない。
+# ここで core 辞書をダウンロードし、config/sudachi に置く。
+# USER root は、ファイルを置くために一時的に管理者権限へ切り替えている。
+USER root
+ARG SUDACHI_DICT_URL=http://sudachi.s3-website-ap-northeast-1.amazonaws.com/sudachidict/sudachi-dictionary-latest-core.zip
+# 置き場を作り → 辞書 zip を取得 → system_core.dic だけ取り出して配置 →
+# 一時ファイルを消し → 所有者を elasticsearch ユーザーに直す、を1つの RUN で行う。
+# （\ は行が続く印。&& は「前が成功したら次を実行」）
+RUN mkdir -p /usr/share/elasticsearch/config/sudachi \
+ && curl -sSL -o /tmp/sudachidict.zip "${SUDACHI_DICT_URL}" \
+ && (unzip -o -j /tmp/sudachidict.zip '*system_core.dic' -d /usr/share/elasticsearch/config/sudachi \
+     || (microdnf install -y unzip \
+         && unzip -o -j /tmp/sudachidict.zip '*system_core.dic' -d /usr/share/elasticsearch/config/sudachi)) \
+ && rm -f /tmp/sudachidict.zip \
+ && chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config/sudachi
+# 権限を元の一般ユーザー（elasticsearch）に戻す。ES は root では動かさないため。
+USER elasticsearch
