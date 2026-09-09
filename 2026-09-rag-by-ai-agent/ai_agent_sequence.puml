@@ -1,0 +1,62 @@
+@startuml Elastic_AI_Agent_Demo_Sequence_Diagram 
+skinparam style strictuml
+skinparam sequenceMessageAlign center
+
+title Elastic AI Agent Demo シーケンス図（概略）
+
+actor "Actor"
+
+box "Elastic Stack" #ccccff
+participant "AI Agent"
+participant "AI Agent Tool"
+database "Elasticsearch"
+end box
+
+box "LLM" #ffcccc
+participant "Text Embedding Model"
+participant "Rerank Model"
+participant "Chat Model"
+end box
+
+"Actor" -> "AI Agent" : 質問入力
+
+activate "AI Agent"
+
+"AI Agent" -> "Chat Model" : 入力された質問の意図の解析依頼
+
+"Chat Model" --> "AI Agent" : 解析結果
+
+"AI Agent" -> "Chat Model" : どのツールを呼び出すべきか？の判定依頼
+"Chat Model" --> "AI Agent" : 判定結果
+
+"AI Agent" -> "AI Agent Tool" : 必要なツールの呼び出し
+
+activate "AI Agent Tool"
+
+"AI Agent Tool" -> "Elasticsearch" : ES|QL クエリ の呼び出し
+
+"Elasticsearch" -> "Text Embedding Model" : クエリ→ベクトルへの変換依頼
+"Text Embedding Model" --> "Elasticsearch" : 変換後のベクトル
+
+"Elasticsearch" -> "Elasticsearch" : ハイブリッド検索
+
+"Elasticsearch" -> "Rerank Model" : Semantic Rerank の依頼
+
+"Rerank Model" --> "Elasticsearch" : Semantic Rerankの結果
+
+"Elasticsearch" --> "AI Agent Tool" : クエリ結果
+
+"AI Agent Tool" -> "AI Agent" : クエリ結果
+
+deactivate "AI Agent Tool"
+
+"AI Agent" -> "Chat Model" : クエリ結果を踏まえての質問への回答生成依頼
+
+"Chat Model" --> "AI Agent" : 回答生成結果
+
+
+"AI Agent" --> "Actor" : 質問に対する回答
+
+deactivate "AI Agent"
+
+@enduml
