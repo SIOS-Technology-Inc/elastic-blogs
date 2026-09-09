@@ -17,8 +17,7 @@ POST /_query
 FROM kakinosuke_202609 METADATA _score, _id, _index
 | FORK (WHERE MATCH(content.semantic, ?query) | SORT _score DESC | LIMIT 10)
        (WHERE MATCH(content, ?query) | SORT _score DESC | LIMIT 10)
-| DROP content.semantic
-| FUSE
+| FUSE RRF
 | KEEP chunk_no, content, _score
 | SORT _score DESC
 | LIMIT 10
@@ -31,7 +30,7 @@ FROM kakinosuke_202609 METADATA _score, _id, _index
 
 FORK でセマンティック検索とキーワード検索を行います。
 
-FUSE で2つの検索結果を融合(RRF)します。
+FUSE RRF で2つの検索結果を融合(RRF)します。
 
 ## 検索結果
 

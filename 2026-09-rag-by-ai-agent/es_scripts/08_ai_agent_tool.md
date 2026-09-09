@@ -14,13 +14,11 @@ Create new tool 画面で下記のように登録します。
 FROM kakinosuke_202609* METADATA _score, _id, _index
 | FORK (WHERE MATCH(content.semantic, ?query) | SORT _score DESC | LIMIT 10)
        (WHERE MATCH(content, ?query) | SORT _score DESC | LIMIT 10)
-| DROP content.semantic
-| FUSE
+| FUSE RRF
 | KEEP chunk_no, content, _score
 | SORT _score DESC
 | LIMIT 10
 | RERANK ?query ON content WITH { "inference_id" : ".jina-reranker-v3.5" }
-| KEEP chunk_no, content, _score
 | SORT _score DESC
 | LIMIT 5
 ```
@@ -40,7 +38,11 @@ FROM kakinosuke_202609* METADATA _score, _id, _index
 
 - Tool ID : kakinosuke.get_contents
 
-- Description : kakinosuke_202609 インデックスに対して、RRF によるハイブリッド検索を行ったあと、セマンティックリランクを行い、上位5件を返す。
+- Description : 下記を入力する
+
+```
+kakinosuke_202609 インデックスに対して、キーワード検索とセマンティック検索を行い、RRFで結果を統合したあと、セマンティックリランクで質問に近い順に並べ直し、上位5件の本文チャンクを返す。
+```
 
 ## Labels
 

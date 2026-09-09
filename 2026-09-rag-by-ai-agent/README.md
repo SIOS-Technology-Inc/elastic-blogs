@@ -114,17 +114,25 @@ Kibana の Integration / Upload File 機能を使って [data/kakinosuke_chunked
 
 [es_scripts/04_keyword_search.md](./es_scripts/04_keyword_search.md) ファイル内のリクエストを Dev Tools から発行し、kakinosuke_202609 インデックスに対しキーワード検索を行う。
 
+（この作業は必須ではありません。確認のための作業です。）
+
 #### 4.6. セマンティック検索
 
 [es_scripts/05_semantic_search.md](./es_scripts/05_semantic_search.md) ファイル内のリクエストを Dev Tools から発行し、kakinosuke_202609 インデックスに対しセマンティック検索を行う。
+
+（この作業は必須ではありません。確認のための作業です。）
 
 #### 4.7. ハイブリッド検索
 
 [es_scripts/06_hybrid_search.md](./es_scripts/06_hybrid_search.md) ファイル内のリクエストを Dev Tools から発行し、kakinosuke_202609 インデックスに対しキーワード検索をとセマンティック検索のハイブリッド検索(RRF)を行う。
 
+（この作業は必須ではありません。確認のための作業です。）
+
 #### 4.8. セマンティックリランク
 
 [es_scripts/07_semantic_rerank.md](./es_scripts/07_semantic_rerank.md) ファイル内のリクエストを Dev Tools から発行し、kakinosuke_202609 インデックスのハイブリッド検索後の検索結果に対しセマンティックリランクを行う。
+
+（この作業は必須ではありません。確認のための作業です。）
 
 ---
 
@@ -163,13 +171,11 @@ Create new tool 画面が表示されるので、下記のように入力しま�
 FROM kakinosuke_202609* METADATA _score, _id, _index
 | FORK (WHERE MATCH(content.semantic, ?query) | SORT _score DESC | LIMIT 10)
        (WHERE MATCH(content, ?query) | SORT _score DESC | LIMIT 10)
-| DROP content.semantic
-| FUSE
+| FUSE RRF
 | KEEP chunk_no, content, _score
 | SORT _score DESC
 | LIMIT 10
 | RERANK ?query ON content WITH { "inference_id" : ".jina-reranker-v3.5" }
-| KEEP chunk_no, content, _score
 | SORT _score DESC
 | LIMIT 5
 ```
@@ -189,7 +195,11 @@ FROM kakinosuke_202609* METADATA _score, _id, _index
 
 - Tool ID : kakinosuke.get_contents
 
-- Description : kakinosuke_202609 インデックスに対して、RRF によるハイブリッド検索を行ったあと、セマンティックリランクを行い、上位5件を返す。
+- Description : 下記を入力
+
+```
+kakinosuke_202609 インデックスに対して、キーワード検索とセマンティック検索を行い、RRFで結果を統合したあと、セマンティックリランクで質問に近い順に並べ直し、上位5件の本文チャンクを返す。
+```
 
 ##### Labels
 
@@ -232,7 +242,7 @@ New Agent 画面が表示されるので、以下の内容を登録していき�
 - Custom Instructions : 以下を入力します。
 
 ```
-あなたは kakinosuke_202609 インデックスについての質問に答えるエージェントです。
+あなたは柿之助についての質問に答えるエージェントです。
 
 # 指示1
 
@@ -263,17 +273,17 @@ New Agent 画面が表示されるので、以下の内容を登録していき�
 
 ##### Tools タブ
 
-現在チェックされている Tool のチェックを全て外します。
+以下の手順で、kakinosuke.get_contents のみを利用するよう、設定します。
 
-Tool list の右上の Show active only を on にします。
+1. Tool list の右上の Show active only を on にします。
 
 <img src="./imgs/show_active_tools_list.png">
 
-チェックがついている tool を全て off にします。
+2. チェックがついている tool を全て off にします。
 
-再度、Show active only を off にしてから、検索欄に "kakinosuke" と入力します。
+3. 再度、Show active only を off にしてから、検索欄に "kakinosuke" と入力します。
 
-kakinosuke.get_contents が表示されるので、チェックを入れて、\[Save\] をクリックします。
+4. kakinosuke.get_contents が表示されるので、チェックを入れて、\[Save\] をクリックします。
 
 <img src="./imgs/save_a_agent.png">
 
