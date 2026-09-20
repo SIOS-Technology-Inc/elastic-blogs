@@ -1,5 +1,5 @@
 elasticsearch==8.18.1
-streamlit==1.44.0
+streamlit==1.54.0
 python-dotenv==1.0.1
 langchain-cohere==0.4.4
 ollama==0.4.8
