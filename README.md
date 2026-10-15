@@ -22,5 +22,4 @@
 | [2026-09-rag-by-ai-agent](2026-09-rag-by-ai-agent/README.md) | 2026年9月に公開予定の「Pythonコード不要？Elastic AI Agent と ES\|QL で実現する超シンプルな次世代RAG」のサンプル。 |
 | [2026-10-agent-builder-security](2026-10-agent-builder-security/README.md) | 2026年10月に公開の「Elastic Agent Builder 9.5 で AI エージェントの安全対策を試した：できたこと、できなかったこと」の記事（本文・設定・クエリ・スクリーンショット）。 |
 
-Copyright (c) SIOS Technology, Inc. All rights reserved.
-
+Copyright (c) SIOS Technology, Inc.
