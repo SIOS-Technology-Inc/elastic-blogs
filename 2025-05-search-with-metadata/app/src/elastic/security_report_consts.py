@@ -1,5 +1,5 @@
 """
-Copyright (c) SIOS Technology, Inc. All rights reserved.
+Copyright (c) SIOS Technology, Inc.
 
 MIT License
 """
