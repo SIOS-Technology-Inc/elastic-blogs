@@ -18,3 +18,4 @@ certs/
 *.pyc
 *.log
 id_rsa
+.DS_Store
