@@ -1,0 +1,4 @@
+.env
+*.ndjson
+credentials-*.csv
+__pycache__/
